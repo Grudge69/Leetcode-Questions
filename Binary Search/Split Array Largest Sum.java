@@ -23,7 +23,7 @@ class Solution {
             for (int num : nums) {
 
                 if (sum + num > mid) {
-                    // if the sum exceeds then divide it into next part
+                    // If the sum exceeds then divide it into next part
                     parts++;
                     // add first element of next subArray in sum to start calculating sum from
                     // scratch
