@@ -8,10 +8,11 @@ class Solution {
             return nums[0];
         }
 
-        // pivot is not actually pivot but pivot+1 as it is the minimum element
+        // pivot is not actually pivot but pivot+1(0 based indexing)
+        // and it is the minimum element
         return nums[pivot];
     }
-    
+
     int findPivot(int[] arr) {
         int start = 0;
         int end = arr.length - 1;
@@ -19,11 +20,13 @@ class Solution {
             int mid = start + (end - start) / 2;
             // 4 cases over here
             if (mid < end && arr[mid] > arr[mid + 1]) {
-                // instead of returning pivot = mid, we return the next element which is the minimum
-                return mid+1;
+                // instead of returning pivot = mid, we return the next element which is the
+                // minimum
+                return mid + 1;
             }
             if (mid > start && arr[mid] < arr[mid - 1]) {
-                // instead of returning pivot = mid-1, we return the next element which is the minimum
+                // instead of returning pivot = mid-1, we return the next element which is the
+                // minimum
                 return mid;
             }
             if (arr[mid] <= arr[start]) {
