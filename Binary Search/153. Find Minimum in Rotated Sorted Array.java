@@ -19,6 +19,8 @@ class Solution {
         while (start <= end) {
             int mid = start + (end - start) / 2;
             // 4 cases over here
+
+            // CASES WHERE MID OR MID+1 IS PIVOT
             if (mid < end && arr[mid] > arr[mid + 1]) {
                 // instead of returning pivot = mid, we return the next element which is the
                 // minimum
@@ -29,9 +31,13 @@ class Solution {
                 // minimum
                 return mid;
             }
+
+            // CASES WHERE NEITHER MID NOR MID+1 IS PIVOT
             if (arr[mid] <= arr[start]) {
+                // right part(increating)
                 end = mid - 1;
             } else {
+                // left part(increasing)
                 start = mid + 1;
             }
         }
