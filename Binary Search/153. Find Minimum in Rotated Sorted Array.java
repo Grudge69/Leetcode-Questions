@@ -19,11 +19,11 @@ class Solution {
             int mid = start + (end - start) / 2;
             // 4 cases over here
             if (mid < end && arr[mid] > arr[mid + 1]) {
-                // instead of returning pivot = mid, we return the next element which is the                        minimum
+                // instead of returning pivot = mid, we return the next element which is the minimum
                 return mid+1;
             }
             if (mid > start && arr[mid] < arr[mid - 1]) {
-                // instead of returning pivot = mid-1, we return the next element which is the                      minimum
+                // instead of returning pivot = mid-1, we return the next element which is the minimum
                 return mid;
             }
             if (arr[mid] <= arr[start]) {
