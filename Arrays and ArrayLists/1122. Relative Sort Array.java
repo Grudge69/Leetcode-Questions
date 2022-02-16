@@ -22,7 +22,7 @@
 
 
 
-                 // SOLUTION USING FREQ ARRAY
+                // SOLUTION USING FREQ ARRAY
 
 
 class Solution {
