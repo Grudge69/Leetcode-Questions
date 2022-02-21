@@ -44,3 +44,15 @@ class Solution {
         return val;
     }
 }
+
+
+
+                 //SHORTER SOLUTION
+
+// LOGIC IS THAT IF A MAJORITY ELEMENT EXIST THEN AFTER SORTING IT WILL BE PRESENT AT SIZE/2 POSITION AS IT OCCURS MORE THAN SIZE/2 TIMES WHICH MEANS IT TAKES UP THE SIZE/2 INDEX.
+class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length/2];
+    }
+}
