@@ -47,7 +47,7 @@ class Solution {
     private void preorderHelper(Node root, List<Integer> ans){
         if(root == null) return;
         
-        //add our value to ans
+        //add our value to ans(In PREORDER=>Before recursive call)
         ans.add(root.val);
         
         //call for all the children of current node(root)
