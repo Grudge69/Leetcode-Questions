@@ -41,3 +41,23 @@ class Solution {
         return false;
     }
 }
+
+// using HASHMAP
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> valIdxMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            // if the element already exists in HashMap and absolute distance between that
+            // element's index and index(latest before current element) stored in map <= K,
+            // this means duplicate exists within K distance of current element
+            if (valIdxMap.containsKey(nums[i]) && Math.abs((i - valIdxMap.get(nums[i]))) <= k) {
+                return true;
+            }
+
+            // store index(value) at current element(key)
+            // this updates index to latest and ignores previous indices
+            valIdxMap.put(nums[i], i);
+        }
+        return false;
+    }
+}
