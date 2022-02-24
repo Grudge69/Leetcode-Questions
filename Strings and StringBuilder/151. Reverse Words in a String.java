@@ -70,5 +70,8 @@ class Solution {
         //just remove last space that might be added in appending
         return ans.toString().trim();
         
+        //instead to trimming ans we can just return the string from (0 to ans.length-1)
+        // return ans.substring(0, abs.length()-1);
+        
     }
 }
