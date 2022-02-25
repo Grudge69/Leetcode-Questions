@@ -30,7 +30,7 @@
 // s consists of English letters, digits, symbols and spaces.
 
 
-         //SOLUTION USING SET
+         //SOLUTION USING SET(SLIDING WINDOW TECHNIQUE)
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
