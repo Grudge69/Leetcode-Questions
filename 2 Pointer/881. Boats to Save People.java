@@ -42,3 +42,40 @@ class Solution {
         return numOfBoats;// return the num of boats calculated
     }
 }
+
+
+// USING COUNT SORT
+
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        //use count sort instead of O(nlogn) sorting to make it O(n) time but O(limit) space which is constant space as well
+        int[] count = new int[limit+1];
+        
+        for(int person: people){
+            count[person]++;
+        }
+        
+        int j = 0;
+        for(int i=1; i<=limit; i++){
+            int countOfPeople = count[i];
+            while(countOfPeople-->0){
+                people[j++] = i;
+            }
+        }
+        
+        int left = 0, right = people.length - 1;
+        int numOfBoats = 0;
+        
+        while(left<=right){
+            if(people[left]+people[right]<=limit){
+                left++;
+                right--;
+            }else{
+                right--;
+            }
+            numOfBoats++;
+        }
+        
+        return numOfBoats;
+    }
+}
