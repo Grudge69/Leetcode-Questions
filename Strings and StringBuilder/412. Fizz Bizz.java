@@ -24,6 +24,7 @@ class Solution {
             //if i is divisible by neither 3 nor 5
             else{
                 // i+"" converts integer to string
+                // can use Integer.toString(i) also
                 ans.add(i+"");
             }
         }
