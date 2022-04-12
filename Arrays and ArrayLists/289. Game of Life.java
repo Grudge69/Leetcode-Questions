@@ -1,4 +1,4 @@
-// Link:
+// Link: https://leetcode.com/problems/game-of-life/
 
 // Solution: O(1) space
 
@@ -67,7 +67,7 @@ class Solution {
                 //skip out of bounds block
                 if(i<0 || j<0 || i==row || j == col)
                     continue;
-                //in our table 1 and 3 we originally 1 so count them for neighbours
+                //in our table 1 and 3 were originally 1 so count them for neighbours
                 if(board[i][j] == 1 || board[i][j] == 3){
                     neighbour++;
                 }
