@@ -125,7 +125,7 @@ class Solution {
                     temp.right = root;
                     root = root.left;
                 }else{
-                    temp.right = null;
+                    temp.right = null; 
                     
                     // PROCESSING NODE
                     if(prev!=null && prev.val>root.val){
