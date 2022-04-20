@@ -92,15 +92,15 @@ class Solution {
     }
     
     public boolean isValidTree(TreeNode parent, TreeNode child){
+        //both are null
         if(parent == null && child == null){
             return true;
         }
-        if(parent != null && child == null){
+        //only one is null
+        if(parent == null || child == null){
             return false;
         }
-        if(parent == null && child != null){
-            return false;
-        }
+        
         if(parent.val == child.val){
             if(isValidTree(parent.left, child.left) && isValidTree(parent.right, child.right)){
                 return true;
