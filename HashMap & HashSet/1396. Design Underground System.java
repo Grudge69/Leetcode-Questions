@@ -1,6 +1,6 @@
 // Link: https://leetcode.com/problems/design-underground-system/
 
-// Solution: using Hashmap to store info and average times 
+// Solution: using Hashmap to store info and average for all id's
 
 class UndergroundSystem {
     
