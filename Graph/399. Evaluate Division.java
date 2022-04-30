@@ -3,69 +3,76 @@
 // Solution: 
 
 class Solution {
-     // Using DFS
-    private  Map<String, Map<String, Double>> makeGraph(List<List<String>> e, double[] values){
-        // build a graph
-        // like a -> b = values[i]
-        // and b -> a  = 1.0 / values[i];
-        Map<String, Map<String, Double>> graph = new HashMap<>();
-        String u, v;
-        
-        for(int i = 0; i < e.size(); i++){
-            u = e.get(i).get(0);
-            v = e.get(i).get(1);
-            
-            graph.putIfAbsent(u, new HashMap<>());
-            graph.get(u).put(v, values[i]);
-            
-            graph.putIfAbsent(v, new HashMap<>());
-            graph.get(v).put(u, 1/values[i]);
-            
+    //helper class with dest->value(weights) pair
+    class Node {
+        String key;
+        double val;
+
+        public Node(String k, double v) {
+            key = k;
+            val = v;
         }
-        return graph;
     }
-    
+
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        Map<String, Map<String, Double>> graph = makeGraph(equations, values);
+        //build a graph with (src, {dest, value})
+        //we use map because graph is dynamic as there is diff wt associated to diff directions
+        Map<String, List<Node>> g = buildGraph(equations, values);
         
-        double []ans = new double[queries.size()];
+        //contains the result for each query
+        double[] result = new double[queries.size()];
+        //call dfs for each query
+        for (int i = 0; i < queries.size(); i++)
+            //dfs returns the result of each query via traversing graph from query[0] to query[1] and multiplying the values(wt.)
+            result[i] = dfs(queries.get(i).get(0), queries.get(i).get(1), new HashSet(), g);
         
-        // check for every Querie
-        // store it in ans array;
-        for(int i = 0; i < queries.size(); i++){
-            ans[i] = dfs(queries.get(i).get(0) , queries.get(i).get(1) , new HashSet<>(), graph);
-        }
-        return ans;
+        //return the calcualted result for each query
+        return result;
     }
-    
-    public double dfs(String src, String dest, Set<String> visited, Map<String, Map<String, Double>> graph){
-        // check the terminated Case
-        // if string is not present in graph return -1.0;
-        // like [a, e] or [x, x] :)
-        if(graph.containsKey(src ) == false)
+
+    //dfs implementation
+    private double dfs(String s, String d, Set<String> visited, Map<String, List<Node>> g) {
+        //if src or dest variables are not present in the graphs then there is no way to calculate the result
+        if (!(g.containsKey(s) && g.containsKey(d)))
             return -1.0;
+        //src/dest = 1 if src == dest
+        if (s.equals(d))
+            return 1.0;
         
-        // simply say check src and dest are equal :) then return dest 
-        // store it in weight varaible;
-        //case like [a,a] also handle
-        if(graph.get(src).containsKey(dest)){
-            return graph.get(src).get(dest);
-        }
-        
-        visited.add(src);
-        
-        for(Map.Entry<String, Double> nbr : graph.get(src).entrySet()){
-            if(visited.contains(nbr.getKey()) == false){
-                double weight = dfs(nbr.getKey(), dest, visited, graph);
-                
-                // if weight is not -1.0(terminate case)
-                // then mutliply it 
-                // like in querie   a -> c => 2 * 3 = 6
-                if(weight != -1.0){
-                    return nbr.getValue() * weight;
-                }
+        //add current node in visited
+        visited.add(s);
+        //traverse all nodes from the src
+        for (Node ng : g.get(s)) {
+            //go to the node only if not visited already
+            if (!visited.contains(ng.key)) {
+                //find the ans from the neighbour node
+                double ans = dfs(ng.key, d, visited, g);
+                //multiply the ans with our node's answer only if it isn't -1 and return it
+                if (ans != -1.0)
+                    return ans * ng.val;
             }
         }
+        //return -1 if you can't find the result
         return -1.0;
+    }
+
+    // build graph
+    private Map<String, List<Node>> buildGraph(List<List<String>> eq, double[] values) {
+        Map<String, List<Node>> g = new HashMap();
+        for (int i = 0; i < values.length; i++) {
+            //in equations list, get src = variable1 and dest = variable2
+            String src = eq.get(i).get(0);
+            String des = eq.get(i).get(1);
+            //if src or dest is not available then initialize it
+            g.putIfAbsent(src, new ArrayList());
+            g.putIfAbsent(des, new ArrayList());
+            //find the variable src/dest and ad the corresponding values to it like
+            // src->dest = val , dest->src = 1/val
+            // add those as nodes in graph
+            g.get(src).add(new Node(des, values[i]));
+            g.get(des).add(new Node(src, 1 / values[i]));
+        }
+        //return the graph built
+        return g;
     }
 }
