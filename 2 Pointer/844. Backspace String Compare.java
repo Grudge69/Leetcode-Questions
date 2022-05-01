@@ -2,7 +2,7 @@
 
 // Solution
 
-// Stack & Queues
+// Using Stack
 
 class Solution {
     public boolean backspaceCompare(String s, String t) {
