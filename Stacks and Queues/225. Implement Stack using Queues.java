@@ -1,3 +1,7 @@
+// Link: https://leetcode.com/problems/implement-stack-using-queues/
+
+// Solution
+
 class MyStack {
     Queue<Integer> q;
 
