@@ -1,6 +1,6 @@
 // Link: https://leetcode.com/problems/merge-sorted-array/
 
-// Solution
+// Solution: Time O(M+N) Space O(M+N)
 
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
