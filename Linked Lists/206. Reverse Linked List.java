@@ -50,16 +50,6 @@ class Solution {
 
 // NO NEED TO REVESE THE HEAD AND TAIL PTR, JUST USE PREV AS HEAD FOR REVERSED LINKED LIST
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public ListNode reverseList(ListNode head) {
         //if there is 1 or 0 nodes, we can't reverse it
