@@ -1,4 +1,4 @@
-// Link: https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/
+// Link: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 
 // Solution
 
