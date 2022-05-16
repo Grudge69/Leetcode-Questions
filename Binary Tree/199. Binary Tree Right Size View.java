@@ -94,3 +94,40 @@ class Solution {
 
     }
 }
+
+// BFS Alternate
+
+class Solution {
+    // BFS
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if(root == null) {
+            return ans;
+        }
+        
+        Queue<TreeNode> q = new ArrayDeque<>();
+        
+        q.add(root);
+        
+        while(q.size()!=0){
+            int count = q.size();
+            
+            for(int i=0; i<count; i++){
+                TreeNode curr = q.remove();
+                
+                if(i==count-1) {
+                    ans.add(curr.val);
+                }
+                
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                }
+            }
+        }
+        
+        return ans;
+    }
+}
