@@ -2,7 +2,7 @@
 
 // Solution
 
-// DFS-> Processing right node first
+// Take head and tail like linked list
 
 /*
 // Definition for a Node.
@@ -26,6 +26,49 @@ class Node {
     }
 };
 */
+
+class Solution {
+    public Node connect(Node root) {
+        Node curr = root;
+        Node head = null;
+        Node tail = null;
+        
+        while(curr!=null) {
+            //curr on lv x and head,tail on lv x+1
+            while(curr!=null) {
+                if(curr.left!=null) {
+                    if(head == null) {
+                        head = curr.left;
+                        tail = curr.left;
+                    } else {
+                        tail.next = curr.left;
+                        tail = curr.left;
+                    }
+                }
+                
+                if(curr.right!=null) {
+                    if(head == null) {
+                        head = curr.right;
+                        tail = curr.right;
+                    } else {
+                        tail.next = curr.right;
+                        tail = curr.right;
+                    }
+                }
+                
+                curr = curr.next;
+            }
+            
+            curr = head;
+            head = null;
+            tail = null;
+        }
+        
+        return root;
+    }
+}
+
+// DFS-> Processing right node first
 
 class Solution {
     public Node connect(Node root) {
