@@ -2,7 +2,7 @@
 
 // Solution
 
-// DFS
+// DFS - PostOrder
 
 /**
  * Definition for a binary tree node.
@@ -20,16 +20,16 @@
  * }
  */
 class Solution {
+    //contains nodes and coins on that node and nodes below it
     class Pair {
         int nodes;
         int coins;
     }
     
-    int moves = 0;
-    
+    int minCoins = 0;
     public int distributeCoins(TreeNode root) {
         helper(root);
-        return moves;
+        return minCoins;
     }
     
     private Pair helper(TreeNode root) {
@@ -37,15 +37,18 @@ class Solution {
             return new Pair();
         }
         
-        Pair lp = helper(root.left);
-        Pair rp = helper(root.right);
+        //get answer from left and right children
+        Pair lPair = helper(root.left);
+        Pair rPair = helper(root.right);
         
-        Pair mp = new Pair();
-        mp.nodes = lp.nodes + rp.nodes + 1;
-        mp.coins = lp.coins + rp.coins + root.val;
+        //current node's nodes and coins are calculated
+        Pair currPair = new Pair();
+        currPair.nodes = lPair.nodes + rPair.nodes + 1;
+        currPair.coins = lPair.coins + rPair.coins + root.val;
         
-        moves += Math.abs(mp.nodes - mp.coins);
+        //mincoins is calculated as the different between nodes and coins on a particular node and all nodes below it
+        minCoins += Math.abs(currPair.nodes - currPair.coins);
         
-        return mp;
+        return currPair;
     }
 }
