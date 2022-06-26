@@ -24,3 +24,45 @@ class Solution {
         return totalSum - minSubarray;
     }
 }
+
+// Alternate method: sliding window, min subarr
+
+// Approach: Find contiguous subarr of length n-k with least sum and subtract it from total sum of all the elements
+
+// Time: O(N), Space: O(1)
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+        
+        //get the total sum
+        int totalSum = 0;
+        for(int val: cardPoints) {
+            totalSum += val;
+        }
+        
+        //picking up all the cards
+        if(n == k) {
+            return totalSum;
+        }
+        
+        //pick up first n-k-1 values to go towards forming a window of n-k
+        int window = 0;
+        for(int i=0; i<n-k-1; i++) {
+            window += cardPoints[i];
+        }
+        
+        //add 1 value to this window from n-k-1 to n, to make the window of size n-k
+        //check totalSum - window, max value from all windows
+        //subtract leftmost value from window and add next value to the right in window to make the window of size n-k again
+        int ans = 0;
+        for(int i=n-k-1; i<n; i++) {
+            window += cardPoints[i];
+            
+            ans = Math.max(ans, totalSum - window);
+            
+            window -= cardPoints[i-(n-k-1)];//left most value of window
+        }
+        
+        return ans;
+    }
+}
