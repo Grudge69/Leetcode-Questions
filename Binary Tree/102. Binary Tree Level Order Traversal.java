@@ -2,21 +2,6 @@
 
 //SOLUTION: USING BFS
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         if(root == null) return new ArrayList<>();
@@ -55,5 +40,37 @@ class Solution {
         }
         
         return ans;
+    }
+}
+
+// DFS
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if(root == null) {
+            return new ArrayList<>();
+        }
+        
+        List<List<Integer>> allLevels = new ArrayList<>();
+        
+        dfs(root, allLevels, 0);
+        
+        return allLevels;
+    }
+    
+    private void dfs(TreeNode root, List<List<Integer>> allLevels, int currLevel) {
+        if(allLevels.size() == currLevel) {
+            allLevels.add(new ArrayList<>());
+        }
+        
+        allLevels.get(currLevel).add(root.val);
+        
+        if(root.left != null) {
+            dfs(root.left, allLevels, currLevel+1);
+        }
+        
+        if(root.right != null) {
+            dfs(root.right, allLevels, currLevel+1);
+        }
     }
 }
